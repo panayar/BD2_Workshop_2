@@ -79,6 +79,85 @@ create table weekly_reputation(
     calificacion float ,
     comentario varchar(150),
 ```
+## Verificación de creación de única orden por carrito de compra
+## Trigger
+```CREATE OR REPLACE FUNCTION excepcion_duplicados()
+	RETURNS TRIGGER
+	LANGUAGE PLPGSQL
+	AS
+		$$
+		DECLARE
+			cart_in INTEGER = NEW.carrito_id;
+			orders_rec record;
+		BEGIN
+			CREATE TRIGGER orden_place
+			BEFORE INSERT
+			ON compra
+			FOR EACH ROW EXECUTE PROCEDURE excepcion_duplicados();
+			
+			SELECT COUNT(order_id)
+			INTO orders_rec FROM compra WHERE carrito_id=cart_in;
+			IF orders_rec.count > 0 THEN 
+				RAISE EXCEPTION 'DUPLICADO: El carro ya tiene una orden';
+				RETURN OLD;
+			ELSE 
+				RETURN NEW;
+			END IF;
+		END
+		$$
+       CREATE OR REPLACE FUNCTION excepcion_duplicados()
+	RETURNS TRIGGER
+	LANGUAGE PLPGSQL
+	AS
+		$$
+		DECLARE
+			cart_in INTEGER = NEW.carrito_id;
+			orders_rec record;
+		BEGIN
+			CREATE TRIGGER orden_place
+			BEFORE INSERT
+			ON compra
+			FOR EACH ROW EXECUTE PROCEDURE excepcion_duplicados();
+			
+			SELECT COUNT(order_id)
+			INTO orders_rec FROM compra WHERE carrito_id=cart_in;
+			IF orders_rec.count > 0 THEN 
+				RAISE EXCEPTION 'DUPLICADO: El carro ya tiene una orden';
+				RETURN OLD;
+			ELSE 
+				RETURN NEW;
+			END IF;
+		END
+		$$
+      CREATE OR REPLACE FUNCTION excepcion_duplicados()
+	RETURNS TRIGGER
+	LANGUAGE PLPGSQL
+	AS
+		$$
+		DECLARE
+			cart_in INTEGER = NEW.carrito_id;
+			orders_rec record;
+		BEGIN
+			CREATE TRIGGER orden_place
+			BEFORE INSERT
+			ON compra
+			FOR EACH ROW EXECUTE PROCEDURE excepcion_duplicados();
+			
+			SELECT COUNT(order_id)
+			INTO orders_rec FROM compra WHERE carrito_id=cart_in;
+			IF orders_rec.count > 0 THEN 
+				RAISE EXCEPTION 'DUPLICADO: El carro ya tiene una orden';
+				RETURN OLD;
+			ELSE 
+				RETURN NEW;
+			END IF;
+		END
+		$$
+  ```
+  ## Foto
+  ![image](https://user-images.githubusercontent.com/64279165/157806800-e0b66632-4a25-4a6e-86e9-f518facc6fde.png)
+
+        
 ## Integrantes 👧🏻🦸‍♂️👨‍🚀
 * Paula Andrea Anaya Ramirez
 * Luis Esteban Cardenas Cortes
