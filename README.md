@@ -3,7 +3,8 @@
 https://lucid.app/lucidchart/e761f93f-5de6-4371-8960-5493da2203dd/edit?invitationId=inv_348e8025-6a6c-4bf0-a55d-fc39744f3e7a
 
 ## Registro de auditoría de las tablas de producto y variante.
-create table Compra_detalle(
+
+```create table Compra_detalle(
     producto_compra_id serial not null ,
     producto_id int not null ,
     compra_id int not null ,
@@ -77,7 +78,7 @@ create table weekly_reputation(
     compador_id int not null ,
     calificacion float ,
     comentario varchar(150),
-
+```
 ## Integrantes 👧🏻🦸‍♂️👨‍🚀
 * Paula Andrea Anaya Ramirez
 * Luis Esteban Cardenas Cortes
